@@ -1,0 +1,43 @@
+# Docker file to create a container for running JUnit 4 tests with Java 8.
+# Will install the Oracle version of Java 8 and Junit 4 package for Ubuntu 14.04.
+#
+# To build this file execute (including "." at the end): docker build --file="java_and_java-junit.docker" --tag="cobo/java8-junit4" --rm=true .
+#
+# Note: we're only using a single RUN command to minimize the number of layers
+# that Docker will create (every RUN commands creates a new layer). Commands are
+# conncatenated with && and a new line is indicated with \
+#
+#
+# author: hce
+# date: March 05, 2015
+# version: 1.0
+#
+
+# all compilers run on cobo/ubuntu (make sure you've build that one already)
+FROM cobo/ubuntu
+
+# don't use add-apt-respository to add the orcale java 8 repo
+# that would require to install add-apt-repository first which takes up quite some space
+# instead we add the repos manually to /etc/apt/sources.list
+RUN \
+	echo "# Repositories to install Oracle Java 8" >> /etc/apt/sources.list && \
+	echo "deb http://ppa.launchpad.net/webupd8team/java/ubuntu trusty main" >> /etc/apt/sources.list && \
+	echo "deb-src http://ppa.launchpad.net/webupd8team/java/ubuntu trusty main" >> /etc/apt/sources.list && \
+
+	# remove the openjdk that may come preinstalled with ubuntu
+	apt-get purge openjdk* && \
+
+	# update the package manager
+	apt-get update && \
+
+	# the oracle installer asks to confirm the licencse agreement; this commands auto accepts it
+	echo oracle-java8-installer shared/accepted-oracle-license-v1-1 select true | sudo /usr/bin/debconf-set-selections && \
+
+	# install oracle java 8, the java 8 default settings, and junit 4
+	apt-get install -y --force-yes \
+		oracle-java8-installer \
+		oracle-java8-set-default \
+		junit4
+
+# set maintainer
+MAINTAINER cobo <support@codeboard.io>

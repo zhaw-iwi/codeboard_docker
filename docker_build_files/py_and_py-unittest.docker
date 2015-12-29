@@ -1,0 +1,31 @@
+# Docker file to create a container for running Python.
+# Will install Python (which has Unit tests build in) for Ubuntu 14.04.
+#
+# Addtional packages:
+#		* numpy (a numerical library)
+#		* scipy (a scientific library)
+#
+# To build this file execute (including "." at the end): docker build --file="py_and_py-unittest.docker" --tag="cobo/python" --rm=true .
+#
+# Note: we're only using a single RUN command to minimize the number of layers
+# that Docker will create (every RUN commands creates a new layer). Commands are
+# conncatenated with && and a new line is indicated with \
+#
+#
+# author: hce
+# date: March 15, 2015
+# version: 1.0
+
+# all compilers run on cobo/ubuntu (make sure you've build that one already)
+FROM cobo/ubuntu
+
+RUN \
+	# update the package manager
+	apt-get update && \
+
+	# install Python
+	apt-get install -y --force-yes \
+		python python-numpy python-scipy
+
+# set maintainer
+MAINTAINER cobo <support@codeboard.io>
