@@ -21,6 +21,28 @@
 FROM cobo/ubuntu
 
 RUN \
+	# update and upgrade
+	apt-get update && \
+
+	# we need wget which doesn't come preinstalled
+	apt-get install -y --force-yes wget	&& \
+
+	# install a haskell-platform dependency
+	apt-get install -y --force-yes libmemcached-dev && \
+	apt-get install -y --force-yes libgmp-dev && \
+
+	# make sure we're in the home directory
+	cd ~ && \
+
+	# download haskel plattform
+	wget https://haskell.org/platform/download/7.10.3/haskell-platform-7.10.3-unknown-posix-x86_64.tar.gz -O haskell_platform.tar && \
+
+	# extract the downloaded tar
+	tar xf haskell_platform.tar && \
+
+	# install haskell platform
+	./install-haskell-platform.sh && \
+
 	# update the package manager
 	apt-get update && \
 
@@ -29,7 +51,12 @@ RUN \
 		haskell-platform && \
 	
 	# install HSpec
-	cabal update && cabal install hspec
+	cabal update && cabal install hspec && \
+
+	# remove the downloaded files
+	rm haskell_platform.tar && \
+	rm hp-usr-local.tar.gz && \
+	rm install-haskell-platform.sh
 
 # switch user from root to cobo for and rerun the cabal install (otherwise cobo can't access them)
 USER cobo

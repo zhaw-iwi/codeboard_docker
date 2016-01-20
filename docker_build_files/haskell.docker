@@ -1,5 +1,5 @@
 # Docker file to create a container for running Haskell.
-# Will install the Haskell platform and HSpec for Ubuntu 14.04.
+# Will install the Haskell platform for Ubuntu 14.04.
 #
 # Haskell platform: https://www.haskell.org/platform/linux.html
 #
@@ -11,19 +11,46 @@
 #
 #
 # author: hce
-# date: March 15, 2015
-# version: 1.0
+# date: Janurary 20, 2016
+# version: 1.1
 
 # all compilers run on cobo/ubuntu (make sure you've build that one already)
 FROM cobo/ubuntu
 
 RUN \
+	# update and upgrade
+	apt-get update && \
+
+	# we need wget which doesn't come preinstalled
+	apt-get install -y --force-yes wget	&& \
+
+	# install a haskell-platform dependency
+	apt-get install -y --force-yes libmemcached-dev && \
+	apt-get install -y --force-yes libgmp-dev && \
+
+	# make sure we're in the home directory
+	cd ~ && \
+
+	# download haskel plattform
+	wget https://haskell.org/platform/download/7.10.3/haskell-platform-7.10.3-unknown-posix-x86_64.tar.gz -O haskell_platform.tar && \
+
+	# extract the downloaded tar
+	tar xf haskell_platform.tar && \
+
+	# install haskell platform
+	./install-haskell-platform.sh && \
+
 	# update the package manager
 	apt-get update && \
 
 	# install Haskell platform
 	apt-get install -y --force-yes \
-		haskell-platform
+		haskell-platform && \
+	
+	# remove the downloaded files
+	rm haskell_platform.tar && \
+	rm hp-usr-local.tar.gz && \
+	rm install-haskell-platform.sh
 
 # set maintainer
 MAINTAINER cobo <support@codeboard.io>
