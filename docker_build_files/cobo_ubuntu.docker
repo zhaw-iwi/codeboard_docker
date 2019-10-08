@@ -18,7 +18,7 @@
 # version: 1.0
 
 # all compilers run on ubuntu 14.04 so we get the same version
-FROM ubuntu:14.04
+FROM ubuntu:18.04
 
 # create group and user "cobo"; install bc
 RUN groupadd --gid 2506 cobo && \

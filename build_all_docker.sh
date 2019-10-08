@@ -19,14 +19,14 @@ echo "Press any key to continue (Ctrl+c to quit)."
 read INPUT
 
 # the base Ubuntu image which all the other images use
-docker build --file="docker_build_files/cobo_ubuntu.docker" --tag="cobo/ubuntu" --rm=true .
+docker build --file="docker_build_files/cobo_ubuntu.docker" --tag="cobo1/ubuntu" --rm=true .
 
 # language specific images
-docker build --file="docker_build_files/c_and_cpp.docker" --tag="cobo/gcc" --rm=true .
-docker build --file="docker_build_files/haskell-hspec.docker" --tag="cobo/haskell-hspec" --rm=true .
-docker build --file="docker_build_files/haskell.docker" --tag="cobo/haskell" --rm=true .
-docker build --file="docker_build_files/java_and_java-junit.docker" --tag="cobo/java8-junit4" --rm=true .
-docker build --file="docker_build_files/py_and_py-unittest.docker" --tag="cobo/python" --rm=true .
+# docker build --file="docker_build_files/c_and_cpp.docker" --tag="cobo/gcc" --rm=true .
+# docker build --file="docker_build_files/haskell-hspec.docker" --tag="cobo/haskell-hspec" --rm=true .
+# docker build --file="docker_build_files/haskell.docker" --tag="cobo/haskell" --rm=true .
+docker build --file="docker_build_files/java_and_java-junit.docker" --tag="cobo1/java12-junit5" --rm=true .
+# docker build --file="docker_build_files/py_and_py-unittest.docker" --tag="cobo/python" --rm=true .
 
 echo "##########################################"
 echo "# Cobo Docker - Done building all images #"

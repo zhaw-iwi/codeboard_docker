@@ -20,23 +20,23 @@ FROM cobo/ubuntu
 # that would require to install add-apt-repository first which takes up quite some space
 # instead we add the repos manually to /etc/apt/sources.list
 RUN \
-	echo "# Repositories to install Oracle Java 8" >> /etc/apt/sources.list && \
-	echo "deb http://ppa.launchpad.net/webupd8team/java/ubuntu trusty main" >> /etc/apt/sources.list && \
-	echo "deb-src http://ppa.launchpad.net/webupd8team/java/ubuntu trusty main" >> /etc/apt/sources.list && \
-
-	# remove the openjdk that may come preinstalled with ubuntu
-	apt-get purge openjdk* && \
+	echo "# Repositories to install Oracle Java 12" >> /etc/apt/sources.list && \
+	echo "deb http://ppa.launchpad.net/linuxuprising/java/ubuntu bionic main" | tee /etc/apt/sources.list.d/linuxuprising-java.list && \
+    apt-key adv --keyserver hkp://keyserver.ubuntu.com:80 --recv-keys EA8CACC073C3DB2A && \
 
 	# update the package manager
 	apt-get update && \
 
-	# the oracle installer asks to confirm the licencse agreement; this commands auto accepts it
-	echo oracle-java8-installer shared/accepted-oracle-license-v1-1 select true | sudo /usr/bin/debconf-set-selections && \
+    # remove the openjdk that may come preinstalled with ubuntu
+    apt-get purge openjdk* && \
 
-	# install oracle java 8, the java 8 default settings, and junit 4
-	apt-get install -y --force-yes \
-		oracle-java8-installer \
-		oracle-java8-set-default \
+	# the oracle installer asks to confirm the licencse agreement; this commands auto accepts it
+    echo oracle-java12-installer shared/accepted-oracle-license-v1-2 select true | sudo /usr/bin/debconf-set-selections && \
+
+	# install oracle java 12, the java 12 default settings, and junit 4
+	apt-get install -y --assume-yes \
+		oracle-java12-installer \
+		oracle-java12-set-default \
 		junit4
 
 # set maintainer
