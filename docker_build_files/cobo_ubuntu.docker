@@ -25,7 +25,7 @@ RUN groupadd --gid 2506 cobo && \
 	useradd --uid 2506 --gid 2506 -m -d /home/cobo cobo && \
 	chsh -s /bin/bash cobo && \
 	apt-get update && \
-	apt-get -y --force-yes install bc
+	apt-get -y --assume-yes install bc
 
 # copy the script which all containers use to execute "compile" and "run" commands
 COPY ./files_for_image/cobo-exec.sh /home/cobo/

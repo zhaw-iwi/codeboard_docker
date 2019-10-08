@@ -24,7 +24,7 @@ RUN \
 	apt-get update && \
 
 	# install Python
-	apt-get install -y --force-yes \
+	apt-get install -y --assume-yes \
 		python python-numpy python-scipy
 
 # set maintainer

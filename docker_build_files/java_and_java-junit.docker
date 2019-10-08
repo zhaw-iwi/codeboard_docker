@@ -20,6 +20,9 @@ FROM cobo/ubuntu
 # that would require to install add-apt-repository first which takes up quite some space
 # instead we add the repos manually to /etc/apt/sources.list
 RUN \
+    # Gnupg is required
+    apt-get update && apt-get install -y gnupg2 && \
+
 	echo "# Repositories to install Oracle Java 12" >> /etc/apt/sources.list && \
 	echo "deb http://ppa.launchpad.net/linuxuprising/java/ubuntu bionic main" | tee /etc/apt/sources.list.d/linuxuprising-java.list && \
     apt-key adv --keyserver hkp://keyserver.ubuntu.com:80 --recv-keys EA8CACC073C3DB2A && \
@@ -31,7 +34,7 @@ RUN \
     apt-get purge openjdk* && \
 
 	# the oracle installer asks to confirm the licencse agreement; this commands auto accepts it
-    echo oracle-java12-installer shared/accepted-oracle-license-v1-2 select true | sudo /usr/bin/debconf-set-selections && \
+    echo oracle-java12-installer shared/accepted-oracle-license-v1-2 select true | /usr/bin/debconf-set-selections && \
 
 	# install oracle java 12, the java 12 default settings, and junit 4
 	apt-get install -y --assume-yes \
