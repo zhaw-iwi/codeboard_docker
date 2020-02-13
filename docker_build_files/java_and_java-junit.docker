@@ -41,6 +41,9 @@ RUN \
 	# the oracle installer asks to confirm the licencse agreement; this commands auto accepts it
     # echo oracle-java12-installer shared/accepted-oracle-license-v1-2 select true | /usr/bin/debconf-set-selections && \
 
+    # the oracle installer asks to confirm the licencse agreement; this commands auto accepts it
+    echo oracle-java13-installer shared/accepted-oracle-license-v1-2 select true | /usr/bin/debconf-set-selections && \
+
 	# install oracle java 12, the java 12 default settings, and junit 4
 	# apt-get install -y --assume-yes \
 	# 	oracle-java12-installer \
