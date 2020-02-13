@@ -21,8 +21,8 @@ FROM cobo/ubuntu
 # instead we add the repos manually to /etc/apt/sources.list
 RUN \
 
-    sudo add-apt-repository ppa:linuxuprising/java && \
-    sudo apt update && \
+    add-apt-repository ppa:linuxuprising/java && \
+    apt update && \
 
     # remove the openjdk that may come preinstalled with ubuntu
     apt-get purge openjdk* && \
