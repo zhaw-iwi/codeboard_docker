@@ -51,7 +51,7 @@ RUN \
 	#	junit4
 
     # install oracle java 13, the java 13 default settings, and junit 5
-    # apt-get install -y --assume-yes \
-    # 	oracle-java13-installer \
-    #	oracle-java13-set-default \
-    #	junit5
+    apt-get install -y --assume-yes \
+    	oracle-java13-installer \
+        oracle-java13-set-default \
+    	junit5
