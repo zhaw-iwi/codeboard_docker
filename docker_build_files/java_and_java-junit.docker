@@ -21,6 +21,8 @@ FROM cobo/ubuntu
 # instead we add the repos manually to /etc/apt/sources.list
 RUN \
 
+    apt-get install -y --assume-yes software-properties-common && \
+
     add-apt-repository ppa:linuxuprising/java && \
     apt update && \
 
