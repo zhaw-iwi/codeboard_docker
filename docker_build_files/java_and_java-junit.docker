@@ -21,7 +21,7 @@ FROM cobo/ubuntu
 # instead we add the repos manually to /etc/apt/sources.list
 RUN \
     # Gnupg is required
-    # apt-get update && apt-get install -y gnupg2 && \
+    apt-get update && apt-get install -y gnupg2 && \
 
 	# echo "# Repositories to install Oracle Java 12" >> /etc/apt/sources.list && \
 	# echo "deb http://ppa.launchpad.net/linuxuprising/java/ubuntu bionic main" | tee /etc/apt/sources.list.d/linuxuprising-java.list && \
