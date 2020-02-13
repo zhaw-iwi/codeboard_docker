@@ -34,7 +34,7 @@ RUN \
     apt-get purge openjdk* && \
 
     # the oracle installer asks to confirm the licencse agreement; this commands auto accepts it
-    echo oracle-java13-installer shared/accepted-oracle-license-v1-2 select true | sudo /usr/bin/debconf-set-selections && \
+    echo oracle-java13-installer shared/accepted-oracle-license-v1-2 select true | /usr/bin/debconf-set-selections && \
 
     # install oracle java 13, the java 13 default settings, and junit 5
     apt-get install -y --assume-yes oracle-java13-installer oracle-java13-set-default junit4
