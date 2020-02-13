@@ -42,7 +42,7 @@ RUN \
     # echo oracle-java12-installer shared/accepted-oracle-license-v1-2 select true | /usr/bin/debconf-set-selections && \
 
     # the oracle installer asks to confirm the licencse agreement; this commands auto accepts it
-    echo oracle-java13-installer shared/accepted-oracle-license-v1-2 select true | /usr/bin/debconf-set-selections && \
+    echo oracle-java13-installer shared/accepted-oracle-licence-v1-2 boolean true | /usr/bin/debconf-set-selections && \
 
 	# install oracle java 12, the java 12 default settings, and junit 4
 	# apt-get install -y --assume-yes \
@@ -51,7 +51,7 @@ RUN \
 	#	junit4
 
     # install oracle java 13, the java 13 default settings, and junit 5
-    apt-get install -y --assume-yes \
+    apt-get install -y --force-yes \
     	oracle-java13-installer \
         oracle-java13-set-default \
     	junit5
