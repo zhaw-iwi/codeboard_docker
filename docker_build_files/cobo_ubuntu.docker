@@ -22,8 +22,8 @@ FROM ubuntu:18.04
 
 # create group and user "cobo"; install bc
 RUN groupadd --gid 2506 cobo && \
-	useradd --uid 2506 --gid 2506 -m -d /home/cobo cobo && \
-	chsh -s /bin/bash cobo && \
+	useradd --uid 2506 --gid 2506 -m -d /home/cobo mantra && \
+	chsh -s /bin/bash mantra && \
 	apt-get update && \
 	apt-get -y --assume-yes install bc
 
