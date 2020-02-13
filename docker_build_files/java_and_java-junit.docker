@@ -20,20 +20,38 @@ FROM cobo/ubuntu
 # that would require to install add-apt-repository first which takes up quite some space
 # instead we add the repos manually to /etc/apt/sources.list
 RUN \
+    # Gnupg is required
+    apt-get update && apt-get install -y gnupg2 && \
 
-    apt-get install -y --assume-yes software-properties-common && \
+	# echo "# Repositories to install Oracle Java 12" >> /etc/apt/sources.list && \
+	# echo "deb http://ppa.launchpad.net/linuxuprising/java/ubuntu bionic main" | tee /etc/apt/sources.list.d/linuxuprising-java.list && \
+    # apt-key adv --keyserver hkp://keyserver.ubuntu.com:80 --recv-keys EA8CACC073C3DB2A && \
 
-    add-apt-repository ppa:linuxuprising/java && \
-    apt update && \
+    su - &&\
+    # echo "# Repositories to install Oracle Java 13" >> /etc/apt/sources.list && \
+    echo "deb http://ppa.launchpad.net/linuxuprising/java/ubuntu bionic main" | tee /etc/apt/sources.list.d/linuxuprising-java.list && \
+    apt-key adv --keyserver hkp://keyserver.ubuntu.com:80 --recv-keys 73C3DB2A && \
+
+	# update the package manager
+	apt-get update && \
 
     # remove the openjdk that may come preinstalled with ubuntu
     apt-get purge openjdk* && \
 
+	# the oracle installer asks to confirm the licencse agreement; this commands auto accepts it
+    # echo oracle-java12-installer shared/accepted-oracle-license-v1-2 select true | /usr/bin/debconf-set-selections && \
+
     # the oracle installer asks to confirm the licencse agreement; this commands auto accepts it
-    echo oracle-java12-installer shared/accepted-oracle-license-v1-2 select true | /usr/bin/debconf-set-selections && \
+    echo oracle-java13-installer shared/accepted-oracle-license-v1-2 select true | /usr/bin/debconf-set-selections && \
+
+	# install oracle java 12, the java 12 default settings, and junit 4
+	# apt-get install -y --assume-yes \
+	# 	oracle-java12-installer \
+	#	oracle-java12-set-default \
+	#	junit4
 
     # install oracle java 13, the java 13 default settings, and junit 5
     apt-get install -y --assume-yes \
-    	oracle-java12-installer \
-        oracle-java12-set-default \
-    	junit4
+    	oracle-java13-installer \
+        oracle-java13-set-default \
+    	junit5
