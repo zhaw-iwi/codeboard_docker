@@ -22,7 +22,7 @@ FROM ubuntu:18.04
 
 # create group "cobo" and user "mantra"; install bc
 RUN groupadd --gid 2506 cobo && \
-	useradd --uid 10001 --gid 2506 -m -d /home/mantra mantra && \
+	useradd --uid 2507 --gid 2506 -m -d /home/mantra mantra && \
 	chsh -s /bin/bash mantra && \
 	apt-get update && \
 	apt-get -y --assume-yes install bc
