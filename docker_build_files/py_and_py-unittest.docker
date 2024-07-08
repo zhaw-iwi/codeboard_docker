@@ -24,8 +24,8 @@ RUN \
 	apt-get update && \
 
 	# install Python
-	apt-get install -y --assume-yes \
-		python python-numpy python-scipy
+	apt-get install -y \
+		python3 python3-numpy python3-scipy
 
 # set maintainer
 MAINTAINER cobo <support@codeboard.io>
