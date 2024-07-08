@@ -1,5 +1,5 @@
-# Docker file to create a container for running JUnit 4 tests with Java 8.
-# Will install the Oracle version of Java 8 and Junit 4 package for Ubuntu 14.04.
+# Docker file to create a container for running JUnit 4 tests with Java 17.
+# Will install the Oracle version of Java 17 and Junit 4 package for Ubuntu 22.04.
 #
 # To build this file execute (including "." at the end): docker build --file="java_and_java-junit.docker" --tag="cobo/java8-junit4" --rm=true .
 #
@@ -16,7 +16,7 @@
 # all compilers run on cobo/ubuntu (make sure you've build that one already)
 FROM cobo/ubuntu
 
-# don't use add-apt-respository to add the orcale java 8 repo
+# don't use add-apt-respository to add the orcale java 17 repo
 # that would require to install add-apt-repository first which takes up quite some space
 # instead we add the repos manually to /etc/apt/sources.list
 RUN \
@@ -39,7 +39,7 @@ RUN \
     echo oracle-java17-installer shared/accepted-oracle-license-v1-3 select true | /usr/bin/debconf-set-selections && \
 
 
-    # install oracle java 13, the java 13 default settings, and junit 5
+    # install oracle java 17, the java 17 default settings, and junit 4
     # apt-get install -y --assume-yes oracle-java13-installer oracle-java13-set-default junit4
     apt-get install -y --assume-yes oracle-java17-installer oracle-java17-set-default junit4
 

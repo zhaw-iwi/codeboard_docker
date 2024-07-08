@@ -1,5 +1,5 @@
 # Docker file to create a container for running Python.
-# Will install Python (which has Unit tests build in) for Ubuntu 14.04.
+# Will install Python (which has Unit tests build in) for Ubuntu 22.04.
 #
 # Addtional packages:
 #		* numpy (a numerical library)
