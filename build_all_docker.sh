@@ -19,11 +19,11 @@ echo "Press any key to continue (Ctrl+c to quit)."
 read INPUT
 
 # the base Ubuntu image which all the other images use
-docker build --file="docker_build_files/cobo_ubuntu.docker" --tag="cobo/ubuntu" --rm=true .
+docker build --file="docker_build_files/cobo_ubuntu.Dockerfile" --tag="cobo/ubuntu" --rm=true .
 
 # language specific images
-docker build --file="docker_build_files/java_and_java-junit.docker" --tag="cobo/java" --rm=true .
-docker build --file="docker_build_files/py_and_py-unittest.docker" --tag="cobo/python" --rm=true .
+docker build --file="docker_build_files/java_and_java-junit.Dockerfile" --tag="cobo/java" --rm=true .
+docker build --file="docker_build_files/py_and_py-unittest.Dockerfile" --tag="cobo/python" --rm=true .
 
 echo "##########################################"
 echo "# Cobo Docker - Done building all images #"

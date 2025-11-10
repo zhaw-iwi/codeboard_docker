@@ -1,5 +1,5 @@
 # Docker file to create a container for running C and C++.
-# Will use GCC which comes with Ubuntu 22.04.
+# Will use GCC which comes with Ubuntu:22.04.
 #
 #
 # To build this file execute (including "." at the end): docker build --file="cobo_ubuntu.docker" --tag="cobo/ubuntu" --rm=true .
@@ -12,23 +12,19 @@
 # and user-id 2506. It also installs the "bc" tool and copys a bash script
 # into the home folder of the "cobo" userc
 #
-#
-# author: hce
-# date: August 12, 2015
-# version: 1.0
 
 # all compilers run on ubuntu 22.04 so we get the same version
 FROM ubuntu:22.04
 
 # create group "cobo" and user "mantra"; install bc
 RUN groupadd --gid 2506 cobo && \
-	useradd --uid 2507 --gid 2506 -m -d /home/mantra mantra && \
-	chsh -s /bin/bash mantra && \
-	apt-get update && \
-	apt-get -y --assume-yes install bc
+  useradd --uid 2507 --gid 2506 -m -d /home/mantra mantra && \
+  chsh -s /bin/bash mantra && \
+  apt-get update && \
+  apt-get -y --assume-yes install bc
 
 # copy the script which all containers use to execute "compile" and "run" commands
 COPY ./files_for_image/cobo-exec.sh /home/mantra/
 
 # set maintainer
-MAINTAINER cobo <support@codeboard.io>
+LABEL maintainer="cobo <support@codeboard.io>"

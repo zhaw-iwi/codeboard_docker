@@ -20,12 +20,11 @@
 FROM cobo/ubuntu
 
 RUN \
-	# update the package manager
-	apt-get update && \
-
-	# install Python
-	apt-get install -y \
-		python3 python3-numpy python3-scipy
+  # update the package manager
+  apt-get update && \
+  # install Python
+  apt-get install -y \
+  python3 python3-numpy python3-scipy
 
 # set maintainer
-MAINTAINER cobo <support@codeboard.io>
+LABEL maintainer="cobo <support@codeboard.io>"
